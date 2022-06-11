@@ -7,11 +7,18 @@ import axios from "axios";
 
 function App() {
   const URL = "http://www.poatransporte.com.br/php/facades/process.php";
-
   //Puxando as linhas
   const [linhasBus, setLinhasBus] = useState([]);
   const [linhasLotacao, setlinhasLotacao] = useState([]);
   const [latLng, setLatLng] = useState([]);
+
+
+ 
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyD8_ST4dqmxuAMjXE0RUUDTvHFvHawVqsU",
+  });
+
 
   useEffect(() => {
     axios.get(URL + "?a=nc&p=%&t=o").then(({ data }) => {
@@ -27,11 +34,6 @@ function App() {
     });
     }, []);
 
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: "AIzaSyD8_ST4dqmxuAMjXE0RUUDTvHFvHawVqsU",
-  });
-  
   return (
     <>
       <div className="map">
